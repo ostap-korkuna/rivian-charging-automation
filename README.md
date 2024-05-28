@@ -92,6 +92,7 @@ See [Hubitat Setup](#hubitat-setup) for details.
 ### 4. Test the script
 ```shell
 cd charging_automation
+pip install --no-cache-dir -r requirements.txt
 python main.py 
 ```
 If the algorithm iteration runs successfully, proceed to the next step to build and run it in docker.
