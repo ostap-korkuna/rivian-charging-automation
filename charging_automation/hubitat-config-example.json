@@ -1,0 +1,8 @@
+{
+  "host": "http://192.168.1.123",
+  "api-id": "id from Maker API",
+  "token": "token from Maker API",
+  "automation-on-switch-id": "101",
+  "night-charge-switch-id": "102",
+  "info-device-id": "103"
+}

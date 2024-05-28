@@ -1,0 +1,11 @@
+
+services:
+  charging_automation:
+    image: charging_automation
+    restart: always
+    environment:
+      - TZ=America/Los_Angeles  # Use Pacific tz
+      
+# Use system tz
+#    volumes:
+#      - /etc/localtime:/etc/localtime:ro

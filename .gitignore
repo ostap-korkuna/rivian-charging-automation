@@ -1,0 +1,6 @@
+*__pycache__*
+.idea/
+charging_automation/configuration/
+charging_automation/credentials.json
+charging_automation/hubitat-config.json
+charging_automation/rivian-session.json
