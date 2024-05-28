@@ -8,6 +8,8 @@ needs.
 | WARNING: This script is provided as is, without any guarantees it will work for you. Use at your own risk.
 | :---
 
+![Automation in action 1](https://github.com/ostap-korkuna/rivian-charging-automation/assets/44854323/96393ac8-1590-437d-bd9d-c5851d172b60)
+
 TODO: insert a screenshot of nice full day of charging
 
 **Why not just use the Enphase EVSE and its native excess solar charging feature?**
