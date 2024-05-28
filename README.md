@@ -1,22 +1,26 @@
 # Solar Charging for Rivian
 
+| WARNING: This script is provided as is, without any guarantees it will work for you. Use at your own risk.
+| :---
+
 This script automates charging a Rivian vehicle using excess solar energy produced by the Enphase PV system. It 
 dynamically adjusts the vehicle's charging speed (in Amps) to align with the available surplus solar production.
 Additionally, it can force charge to a certain level at night in case solar power alone is not enough for your daily
 needs. 
 
-| WARNING: This script is provided as is, without any guarantees it will work for you. Use at your own risk.
-| :---
+<img src="https://github.com/ostap-korkuna/rivian-charging-automation/assets/44854323/96393ac8-1590-437d-bd9d-c5851d172b60" height="500">
+<img src="https://github.com/ostap-korkuna/rivian-charging-automation/assets/44854323/a0b3c539-b300-4fbf-b5b9-7a91d0d7f6ec" height="500">
 
-TODO: insert a screenshot of nice full day of charging
 
-**Why not just use the Enphase EVSE and its native excess solar charging feature?**
 
-I tried it, but was not impressed by how well it adjusts to my solar production, mainly because its algorithm is very 
+**Why not just use the Enphase IQ EV Charger and its native excess solar charging feature?**
+
+I tried it, but was not impressed by how well it adjusts to solar production, mainly because its algorithm is very 
 conservative, and it can only change the charging speed at 25% increments, while the charger inside the Rivian vehicle 
 can make more precise adjustments between 8A and 48A with 2A steps. 
 
-TODO: insert a screenshot of script performance vs Enphase charging automation performance
+<img src="https://github.com/ostap-korkuna/rivian-charging-automation/assets/44854323/c6d2e0f3-d7a9-4c98-9203-a49ce4dae346" height="500">
+
 
 ## Requirements:
 1) Rivian vehicle (tested on R1S)
