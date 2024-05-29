@@ -8,9 +8,9 @@ dynamically adjusts the vehicle's charging speed (in Amps) to align with the ava
 Additionally, it can force charge to a certain level at night in case solar power alone is not enough for your daily
 needs. 
 
+<img src="https://github.com/ostap-korkuna/rivian-charging-automation/assets/44854323/e5781756-0f21-4e07-886c-8288c4bf8046" height="500"> &nbsp;
+<img src="https://github.com/ostap-korkuna/rivian-charging-automation/assets/44854323/a0b3c539-b300-4fbf-b5b9-7a91d0d7f6ec" height="500"> &nbsp;
 <img src="https://github.com/ostap-korkuna/rivian-charging-automation/assets/44854323/96393ac8-1590-437d-bd9d-c5851d172b60" height="500">
-<img src="https://github.com/ostap-korkuna/rivian-charging-automation/assets/44854323/a0b3c539-b300-4fbf-b5b9-7a91d0d7f6ec" height="500">
-
 
 
 **Why not just use the Enphase IQ EV Charger and its native excess solar charging feature?**
@@ -122,7 +122,7 @@ If you have a Hubitat home automation hub, then you can use it to control your c
 
 Here is how my Hubitat dashboard looks like:
 
-TODO: insert a screenshot of my Hubitat dashboard
+<img src="https://github.com/ostap-korkuna/rivian-charging-automation/assets/44854323/e5781756-0f21-4e07-886c-8288c4bf8046" height="500">
 
 ### 1. Create virtual devices
 Create 3 virtual devices:
