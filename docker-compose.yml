@@ -2,7 +2,7 @@
 services:
   charging_automation:
     image: charging_automation
-    restart: always
+    restart: unless-stopped
     environment:
       - TZ=America/Los_Angeles  # Use Pacific tz
       
