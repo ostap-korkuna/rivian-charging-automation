@@ -122,6 +122,11 @@ class RivianAPI:
             return
 
         data = response.json()
+
+        if data['data']['vehicleState']['chargerStatus'] == None:
+            logger.info('Rivian vehicle data missing — might be in service mode')
+            return
+
         self.charging_status = data['data']['vehicleState']['chargerStatus']['value']
         self.battery_level = data['data']['vehicleState']['batteryLevel']['value']
         logger.info('Rivian vehicle data loaded')
