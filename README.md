@@ -68,7 +68,7 @@ increase Amperage; Positive — decrease it.
 
 ### 1. Check out the code
 
-### 2. Create a credentials file
+### 2. Create a credentials file and authenticate
 Copy `credentials-example.json` as `credentials.json` and add your Rivian email/password, Enphase serial number, host IP
 and authentication token.
 
@@ -85,6 +85,8 @@ Your `credentials.json` should look similar to this:
     "enphase-gateway-host": "https://192.168.1.123"
 }
 ```
+
+Rivian now requires 2-factor authentication. Run `python RivianSessionInitOTP.py` to initiate a Rivian API session.
 
 ### 3. [Optional] Create `hubitat-config.json`
 If using Hubitat to control your automation, copy `hubitat-config-example.json` to `hubitat-config.json` and update with
