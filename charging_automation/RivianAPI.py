@@ -187,7 +187,6 @@ class RivianAPI:
             return None
 
         data = response.json()
-        print(data)
         return data['data']['getVehicle']['chargingSchedules']
 
     def get_current_schedule_amp(self):
