@@ -88,7 +88,8 @@ class RivianAPI:
         headers = {
             'a-sess': self.app_session_token,
             'u-sess': self.user_session_token,
-            'csrf-token': self.csrf_token
+            'csrf-token': self.csrf_token,
+            'apollographql-client-name': 'com.rivian.android.consumer'
         }
 
         response = requests.post(self.GATEWAY_URL, headers=headers, json=request)
@@ -113,7 +114,8 @@ class RivianAPI:
         headers = {
             'a-sess': self.app_session_token,
             'u-sess': self.user_session_token,
-            'csrf-token': self.csrf_token
+            'csrf-token': self.csrf_token,
+            'apollographql-client-name': 'com.rivian.android.consumer'
         }
         response = requests.post(self.GATEWAY_URL, headers=headers, json=request)
 
@@ -175,7 +177,8 @@ class RivianAPI:
         headers = {
             'a-sess': self.app_session_token,
             'u-sess': self.user_session_token,
-            'csrf-token': self.csrf_token
+            'csrf-token': self.csrf_token,
+            'apollographql-client-name': 'com.rivian.android.consumer'
         }
         response = requests.post(self.GATEWAY_URL, headers=headers, json=request)
 
@@ -184,6 +187,7 @@ class RivianAPI:
             return None
 
         data = response.json()
+        print(data)
         return data['data']['getVehicle']['chargingSchedules']
 
     def get_current_schedule_amp(self):
@@ -245,7 +249,8 @@ class RivianAPI:
         headers = {
             'a-sess': self.app_session_token,
             'u-sess': self.user_session_token,
-            'csrf-token': self.csrf_token
+            'csrf-token': self.csrf_token,
+            'apollographql-client-name': 'com.rivian.android.consumer'
         }
         response = requests.post(self.GATEWAY_URL, headers=headers, json=request)
 
