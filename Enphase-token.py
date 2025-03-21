@@ -1,6 +1,6 @@
 # Run this script to get an auth token from Enphase
 # Update your username, password and gateway SN below before running
-# Copy the resulting token to credentials.json
+# Copy the resulting token to config.json
 from enphase_api.cloud.authentication import Authentication
 
 username = 'my-enphase-user'

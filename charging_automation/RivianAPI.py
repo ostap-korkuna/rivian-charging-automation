@@ -15,8 +15,8 @@ class RivianAPI:
     AMPS_MAX = 48
     AMPS_MIN = 8
 
-    def __init__(self, credentials_file, session_file):
-        self.credentials_file = credentials_file
+    def __init__(self, config, session_file):
+        self.config = config
         self.session_file = session_file
         self.app_session_token = None
         self.user_session_token = None
@@ -46,10 +46,8 @@ class RivianAPI:
         self.csrf_token = data['data']['createCsrfToken']['csrfToken']
         self.app_session_token = data['data']['createCsrfToken']['appSessionToken']
 
-        with open(self.credentials_file) as f:
-            data = json.load(f)
-            username = data['rivian-user']
-            password = data['rivian-pass']
+        username = self.config.rivian_user
+        password = self.config.rivian_pass
 
         request = {
             "operationName": "Login",

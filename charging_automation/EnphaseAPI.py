@@ -65,11 +65,11 @@ def get_secure_gateway_session(credentials):
                 credentials['enphase-token'] = authentication.get_token_for_uncommissioned_gateway()
 
             # Update the file to include the modified token.
-            with open('credentials.json', mode='w', encoding='utf-8') as json_file:
+            with open('config.json', mode='w', encoding='utf-8') as json_file:
                 json.dump(credentials, json_file, indent=4)
         else:
             # Let the user know why the program is exiting.
-            raise ValueError('Unable to login to the gateway (bad, expired or missing token in credentials.json).')
+            raise ValueError('Unable to login to the gateway (bad, expired or missing token in config.json).')
 
     # Did the user override the library default hostname to the Gateway?
     host = credentials.get('enphase-gateway-host')
@@ -84,7 +84,7 @@ def get_secure_gateway_session(credentials):
     # Are we not able to login to the gateway?
     if not gateway.login(credentials['enphase-token']):
         # Let the user know why the program is exiting.
-        raise ValueError('Unable to login to the gateway (bad, expired or missing token in credentials.json).')
+        raise ValueError('Unable to login to the gateway (bad, expired or missing token in config.json).')
 
     # Return the initialised gateway object.
     return gateway

@@ -3,5 +3,7 @@
     "rivian-pass": "your rivian password",
     "enphase-token": "your auth token from Enphase-token.py",
     "enphase-gateway-sn": "your enphase gateway SN",
-    "enphase-gateway-host": "https://192.168.0.0 - your local enphase gateway IP address"
+    "enphase-gateway-host": "https://192.168.0.0 - your local enphase gateway IP address",
+    "night-time-start": 24,
+    "night-time-end": 7
 }

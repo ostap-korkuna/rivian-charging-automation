@@ -50,8 +50,8 @@ The automation has three modes:
 
 ### Step-by-step Algorithm
 1. Check if the charger is plugged in. If not — disable charging and exit.
-2. If in "default mode" (charge at night): Check if it's night time (midnight <= time <= 7am) AND the EV battery state
-of charge is below the set limit (default 50%) — if yes, set to maximum Amperage and exit.
+2. If in "default mode" (charge at night): Check if it's night time (configurable in `config.json`) AND the EV battery 
+state of charge is below the set limit (default 50%) — if yes, set to maximum Amperage and exit.
 3. Read production data from Enphase: Read net-consumption (import/export) 5 times, 10 seconds between readings. Take
 the median as Grid Consumption.
 4. Calculate the delta Amperage change: decrease by <Grid Consumption> / 240 rounded down to 2. Negative consumption —
@@ -68,13 +68,13 @@ increase Amperage; Positive — decrease it.
 
 ### 1. Check out the code
 
-### 2. Create a credentials file and authenticate
-Copy `credentials-example.json` as `credentials.json` and add your Rivian email/password, Enphase serial number, host IP
+### 2. Create a config file and authenticate
+Copy `config-example.json` as `config.json` and add your Rivian email/password, Enphase serial number, host IP
 and authentication token.
 
 See `Enphase-token.py` for how to get authentication token using your Enphase login and password.
 
-Your `credentials.json` should look similar to this:
+Your `config.json` should look similar to this:
 
 ```json
 {
@@ -82,7 +82,9 @@ Your `credentials.json` should look similar to this:
     "rivian-pass": "mysecretpass",
     "enphase-token": "asdkjhsdkjhakdjh.aksdsakd.skdlksajdlksajdlksajd",
     "enphase-gateway-sn": "202403011234",
-    "enphase-gateway-host": "https://192.168.1.123"
+    "enphase-gateway-host": "https://192.168.1.123",
+    "night-time-start": 24,
+    "night-time-end": 7
 }
 ```
 

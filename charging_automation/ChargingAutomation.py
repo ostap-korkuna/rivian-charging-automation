@@ -2,9 +2,10 @@ import logging
 import math
 from datetime import datetime
 from enum import Enum
-from RivianAPI import RivianAPI
+from Config import Config
 from EnphaseAPI import EnphaseAPI
 from HubitatAPI import HubitatAPI
+from RivianAPI import RivianAPI
 
 logger = logging.getLogger(__name__)
 
@@ -15,9 +16,9 @@ class AutomationMode(Enum):
     SOLAR_ONLY = 2  # only using excess solar, not charging at night
 
 
-def is_night_time():
+def is_night_time(config):
     current_hour = datetime.now().hour
-    return current_hour < 7 or current_hour >= 24
+    return current_hour < config.night_time_end or current_hour >= config.night_time_start
 
 
 def calculate_delta_amp(grid_consumption):
@@ -72,8 +73,9 @@ def run_charging_automation():
         logger.info('Automation is OFF')
         return
 
-    rivian = RivianAPI('credentials.json', 'rivian-session.json')
-    enphase = EnphaseAPI('credentials.json')
+    config = Config('config.json')
+    rivian = RivianAPI(config, 'rivian-session.json')
+    enphase = EnphaseAPI('config.json')
 
     # Check if charger is plugged in
     if not rivian.is_charger_connected():
@@ -84,7 +86,8 @@ def run_charging_automation():
         return
 
     # Check night time
-    if is_night_time():
+    if is_night_time(config):
+        charging = False
         if mode == AutomationMode.SOLAR_ONLY:
             logger.info('Mode == Solar-only: Disabling charging at night')
             rivian.set_schedule_off()
@@ -98,6 +101,7 @@ def run_charging_automation():
                 logger.info('Mode == Default: Charging to {}% at night (now at {}%)'.format(
                     charging_limit, round(ev_battery_level)))
                 rivian.set_schedule_default()
+                charging = True
                 if hubitat:
                     hubitat.set_info_message('Charging: enabled (night)', RivianAPI.AMPS_MAX, 0)
             else:
@@ -106,7 +110,9 @@ def run_charging_automation():
                 rivian.set_schedule_off()
                 if hubitat:
                     hubitat.set_info_message('Charging: disabled (night full)', 0, 0)
-        return
+        # Short-circuit if already charging
+        if charging:
+            return
 
     # Read production data from Enphase
     grid_consumption = enphase.get_median_grid_consumption()
