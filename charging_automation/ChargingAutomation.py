@@ -85,12 +85,15 @@ def run_charging_automation():
             hubitat.set_info_message('Charging: not plugged in', 0, 0)
         return
 
+    # Current charging speed
+    current_amp = rivian.get_current_schedule_amp() if rivian.is_charging() else 0
+
     # Check night time
     if is_night_time(config):
-        charging = False
         if mode == AutomationMode.SOLAR_ONLY:
             logger.info('Mode == Solar-only: Disabling charging at night')
             rivian.set_schedule_off()
+            current_amp = 0
             if hubitat:
                 hubitat.set_info_message('Charging: disabled (night off)', 0, 0)
         if mode == AutomationMode.DEFAULT:
@@ -101,23 +104,21 @@ def run_charging_automation():
                 logger.info('Mode == Default: Charging to {}% at night (now at {}%)'.format(
                     charging_limit, round(ev_battery_level)))
                 rivian.set_schedule_default()
-                charging = True
                 if hubitat:
                     hubitat.set_info_message('Charging: enabled (night)', RivianAPI.AMPS_MAX, 0)
+                # Short-circuit if already charging
+                return
             else:
                 logger.info('Mode == Default: Charged to {}% at night (already at {}%)'.format(
                     charging_limit, round(ev_battery_level)))
                 rivian.set_schedule_off()
+                current_amp = 0
                 if hubitat:
                     hubitat.set_info_message('Charging: disabled (night full)', 0, 0)
-        # Short-circuit if already charging
-        if charging:
-            return
 
     # Read production data from Enphase
     grid_consumption = enphase.get_median_grid_consumption()
     delta_amp = calculate_delta_amp(grid_consumption)
-    current_amp = rivian.get_current_schedule_amp() if rivian.is_charging() else 0
     logger.info('Grid consumption: {} ; Current Amp: {} ; Delta Amp: {}'.format(grid_consumption, current_amp, delta_amp))
 
     if is_delta_amp_too_small(delta_amp):
