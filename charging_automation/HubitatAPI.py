@@ -56,6 +56,8 @@ class HubitatAPI:
         return limit
 
     def set_info_message(self, msg, amps, grid):
+        current_messages = self.get_switch_attribute(self.info_device_id, attribute='variable').split("\n")
+
         time = datetime.now()
         message = '{} -- Amps: {} -- Grid: {}W -- Last update: {}'.format(
             msg,
@@ -63,7 +65,20 @@ class HubitatAPI:
             round(grid),
             time.strftime("%Y-%m-%d %H:%M")
         )
-        self.update_info_device_message(message)
+
+        # Show up to 5 changes
+        messages_to_show = 5
+        compare_chars = 15
+        if message[:compare_chars] == current_messages[-1][:compare_chars]:
+            # Same message, keep the latest
+            current_messages[-1] = message
+        else:
+            # Message changed
+            current_messages.append(message)
+        if len(current_messages) > messages_to_show:
+            current_messages.pop(0)
+
+        self.update_info_device_message("\n".join(current_messages))
 
     def update_info_device_message(self, message):
         url = self.SET_VARIABLE_URL.format(self.host, self.api_id, self.info_device_id, message, self.token)
