@@ -98,7 +98,12 @@ class EnphaseAPI:
     def enphase_gateway(self):
         with open(self.credentials_file, 'r') as f:
             credentials = json.load(f)
-        return get_secure_gateway_session(credentials)
+        try:
+            gateway = get_secure_gateway_session(credentials)
+        except Exception as e:
+            logger.error("Enphase session failed: %s", e)
+            raise
+        return gateway
 
     def read_stats(self):
         production_statistics = self.gateway.api_call('/production.json')

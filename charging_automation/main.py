@@ -25,7 +25,7 @@ def main():
         try:
             run_charging_automation()
         except Exception as e:
-            logger.error("An error occurred:", e)
+            logger.error("An error occurred: %s", e)
         logger.info('Sleeping for {} seconds...'.format(iteration_time))
         time.sleep(iteration_time)
 
