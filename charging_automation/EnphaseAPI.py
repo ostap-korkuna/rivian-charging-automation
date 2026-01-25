@@ -2,7 +2,6 @@
 
 import logging
 import json
-import os.path
 import time
 
 from enphase_api.cloud.authentication import Authentication
@@ -20,8 +19,6 @@ def get_secure_gateway_session(credentials):
 
     It handles JWT validation, token acquisition (if required) and initialises
     the Gateway API wrapper for subsequent interactions.
-
-    It also downloads and stores the certificate from the gateway for secure communication.
 
     Args:
         credentials (dict): A dictionary containing the required credentials.
@@ -73,10 +70,6 @@ def get_secure_gateway_session(credentials):
 
     # Did the user override the library default hostname to the Gateway?
     host = credentials.get('enphase-gateway-host')
-
-    # Download and store the certificate from the gateway so all future requests are secure.
-    if not os.path.exists('gateway.cer'):
-        Gateway.trust_gateway(host)
 
     # Instantiate the Gateway API wrapper (with the default library hostname if None provided).
     gateway = Gateway(host)
